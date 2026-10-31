@@ -131,17 +131,6 @@ const SET = [
     flavor: "Knock knock. Qui est là ? Personne. Le mur est tombé.",
   },
   {
-    id: "c13",
-    name: "Porte-étendard",
-    type: "Créature",
-    rarity: "Commune",
-    icon: "🚩",
-    img: "assets/etandard_humain.jpg",
-    theme: "Alliance · Unité de base",
-    lore: "Il porte la bannière de l'Alliance au milieu de la mêlée ; tant qu'elle flotte, le moral tient.",
-    flavor: "Tant que le drapeau flotte, on avance.",
-  },
-  {
     id: "c14",
     name: "Fantassin",
     type: "Créature",
