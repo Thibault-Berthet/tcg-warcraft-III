@@ -2,7 +2,7 @@
 
 Petit site de collection de cartes façon TCG (sans combat), créé pour le fun à
 l'occasion de la sortie de « WoW Forever ». Ouvre des boosters, révèle tes cartes
-et complète ton album de 40 cartes !
+et complète ton album de 91 cartes !
 
 ## 🎮 Comment ça marche
 
