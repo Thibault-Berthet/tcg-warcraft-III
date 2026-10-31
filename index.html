@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Collectionne les 40 cartes des Royaumes Éternels — édition Forever. Ouvre des boosters, complète ton album !" />
+  <title>WoW Forever — Collectionneur de Cartes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="emblem">⚔️</div>
+    <h1><span class="gold">WoW</span> Forever
+      <small>Collectionneur de cartes — fan project</small>
+    </h1>
+  </div>
+  <nav>
+    <button class="tab-btn active" id="tab-booster">🎴 Booster</button>
+    <button class="tab-btn" id="tab-collection">📖 Collection</button>
+  </nav>
+</header>
+
+<div class="stats" id="stats"></div>
+
+<main>
+  <!-- ============ BOOSTER ============ -->
+  <section id="view-booster">
+    <div class="booster-zone">
+      <div class="pack-stage">
+        <div class="pack" id="pack" title="Clique pour ouvrir !">
+          <div class="pack-emblem">⚔️</div>
+          <div class="pack-title">Royaumes Éternels</div>
+          <div class="pack-sub">Édition Forever</div>
+        </div>
+        <button class="big-btn" id="open-btn">Ouvrir un booster</button>
+        <p class="odds">
+          5 cartes par booster · Commune 65% · Rare 25% · Épique 8,5% · Légendaire 1,5%<br/>
+          1 carte Rare minimum garantie · ✨ 8% de chance de version étincelante
+        </p>
+      </div>
+      <div class="recent-panel">
+        <h3>📜 Dernières tirées</h3>
+        <ul class="recent-list" id="recent-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLLECTION ============ -->
+  <section id="view-collection" class="hidden">
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <b id="prog-text">0 / 40 cartes</b>
+        <span id="prog-pct">0%</span>
+      </div>
+      <div class="bar"><div class="bar-fill" id="prog-fill"></div></div>
+      <div class="rarity-progress" id="rarity-progress"></div>
+    </div>
+    <div class="filters">
+      <button class="f-btn active" data-rarity="all">Toutes raretés</button>
+      <button class="f-btn" data-rarity="Commune">Commune</button>
+      <button class="f-btn" data-rarity="Rare">Rare</button>
+      <button class="f-btn" data-rarity="Épique">Épique</button>
+      <button class="f-btn" data-rarity="Légendaire">Légendaire</button>
+      <div class="sep"></div>
+      <button class="f-btn active" data-type="all">Tous types</button>
+      <button class="f-btn" data-type="Héros">Héros</button>
+      <button class="f-btn" data-type="Créature">Créature</button>
+      <button class="f-btn" data-type="Objet">Objet</button>
+      <button class="f-btn" data-type="Lieu">Lieu</button>
+      <div class="sep"></div>
+      <button class="f-btn" id="hide-owned">Masquer mes cartes</button>
+    </div>
+    <div class="card-grid" id="collection-grid"></div>
+
+    <div class="danger-zone">
+      <button class="ghost-btn" id="export-btn">⬇️ Exporter ma collection</button>
+      <button class="ghost-btn" id="import-btn">⬆️ Importer une collection</button>
+      <button class="ghost-btn" id="reset-btn">🗑️ Tout réinitialiser</button>
+      <input type="file" id="import-file" accept=".json,application/json" class="hidden" />
+    </div>
+  </section>
+</main>
+
+<div class="overlay hidden" id="overlay"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<footer>
+  Site fan non officiel, fait pour le fun à l'occasion de la sortie de « WoW Forever ».<br/>
+  Toutes les cartes, noms et textes sont originaux (parodie) — aucun lien avec Blizzard Entertainment.
+</footer>
+
+<script src="script.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="m+ml9p4z6XJC8zPkjyUQ8A==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
