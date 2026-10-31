@@ -449,6 +449,23 @@ main {
   color: rgba(53, 182, 217, 0.85);
   text-transform: uppercase;
 }
+.card-back .cb-flavor {
+  font-size: 11px;
+  font-style: italic;
+  color: rgba(230, 243, 248, 0.85);
+  text-align: center;
+  padding: 0 14px;
+  line-height: 1.5;
+  max-width: 92%;
+  max-height: 55%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #1d5468 transparent;
+}
+.card-back .cb-flavor.text-long {
+  font-size: 10px;
+  line-height: 1.35;
+}
 .card-front {
   transform: rotateY(180deg);
   border: 2px solid;
@@ -558,8 +575,15 @@ main {
   align-items: center;
   justify-content: center;
 }
-.card.card-lg.has-img .card-art { height: auto; flex: 1 1 auto; min-height: 130px; }
-.card.card-lg .card-meta { padding: 8px 10px 10px; text-align: center; }
+.card.card-lg.has-img .card-art { height: auto; flex: 1 1 auto; min-height: 0; }
+.card.card-lg .card-meta {
+  padding: 8px 10px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 48%;
+}
 .card.card-lg .card-theme {
   font-size: 10px;
   letter-spacing: 2px;
@@ -572,6 +596,14 @@ main {
   font-style: italic;
   color: #a8c6d1;
   line-height: 1.45;
+  overflow-y: auto;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #1d5468 transparent;
+}
+.card.card-lg .card-lore.text-long {
+  font-size: 10px;
+  line-height: 1.35;
 }
 .card-name {
   font-family: Georgia, serif;

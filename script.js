@@ -1125,10 +1125,15 @@ function cardHTML(card, opts = {}) {
     locked = false,
     count = 0,
     badge = null,
+    backFlavor = false,
   } = opts;
   const rc = RARITY_CLASS[card.rarity];
   const nameText = locked ? "???" : card.name;
   const flavorText = locked ? "Pas encore découverte…" : card.flavor;
+  const longFlavor = card.flavor && card.flavor.length > 100;
+  const backFlavorHTML = backFlavor
+    ? `<div class="cb-flavor${longFlavor ? " text-long" : ""}">${flavorText}</div>`
+    : "";
   const countHTML = count > 1 ? `<div class="count-badge">×${count}</div>` : "";
   const holoHTML = holo ? `<div class="holo-badge">✨</div>` : "";
   const badgeHTML =
@@ -1152,7 +1157,7 @@ function cardHTML(card, opts = {}) {
         <div class="card-art">${artHTML}</div>
         <div class="card-meta">
           <div class="card-theme">${card.theme}</div>
-          <div class="card-lore">${locked ? "Pas encore découverte…" : card.lore}</div>
+          <div class="card-lore${card.lore && card.lore.length > 130 ? " text-long" : ""}">${locked ? "Pas encore découverte…" : card.lore}</div>
         </div>`
     : `
         <div class="gem">${card.rarity[0]}</div>
@@ -1164,7 +1169,7 @@ function cardHTML(card, opts = {}) {
   return `
   <div class="card ${rc} ${card.img ? "has-img" : ""} ${card.theme ? "card-lg" : ""} ${flipped ? "flipped" : ""} ${holo ? "holo" : ""} ${locked ? "locked" : ""}" data-id="${card.id}">
     <div class="card-inner">
-      <div class="card-face card-back"><div class="cb-label">WoW Forever</div></div>
+      <div class="card-face card-back">${backFlavorHTML}<div class="cb-label">WoW Forever</div></div>
       <div class="card-face card-front">
         ${frontHTML}
         ${locked ? `<div class="locked-note">🔒 à collectionner</div>` : ""}
@@ -1251,9 +1256,14 @@ function renderCollection() {
         locked: !owned,
         holo: owned && owned.h,
         count: owned ? owned.n : 0,
+        backFlavor: true, // au clic, la carte se retourne et montre le flavor au dos
       });
     })
     .join("");
+  // Clic sur une carte de la collection : elle se retourne (dos = flavor)
+  [...grid.querySelectorAll(".card")].forEach((el) =>
+    el.addEventListener("click", () => el.classList.toggle("flipped")),
+  );
 }
 
 function refreshUI() {
