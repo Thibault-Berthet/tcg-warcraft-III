@@ -1026,6 +1026,32 @@ footer {
   line-height: 1.7;
 }
 
+/* ---------------- MINI-JEU TD ---------------- */
+.td-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0;
+}
+.td-hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.td-hud .big-btn { font-size: 14px; padding: 9px 20px; }
+.td-towers { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+#td-canvas {
+  border: 2px solid #1d5468;
+  border-radius: 12px;
+  background: #0c2b21;
+  cursor: crosshair;
+  max-width: 100%;
+}
+.td-msg { color: var(--muted); font-size: 13px; text-align: center; min-height: 18px; }
+
 @media (max-width: 640px) {
   .card {
     width: 132px;

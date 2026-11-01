@@ -24,6 +24,7 @@
       <nav>
         <button class="tab-btn active" id="tab-booster">🎴 Booster</button>
         <button class="tab-btn" id="tab-collection">📖 Collection</button>
+        <button class="tab-btn hidden" id="tab-td">🏆 Mini-jeu</button>
       </nav>
     </header>
 
@@ -101,6 +102,25 @@
           </button>
         </div>
       </section>
+    <!-- ============ MINI-JEU TD (débloqué à 91/91) ============ -->
+    <section id="view-td" class="hidden">
+      <div class="td-wrap">
+        <div class="td-hud">
+          <span class="chip">❤️ Vies : <b id="td-lives">20</b></span>
+          <span class="chip">🪙 Or : <b id="td-gold">120</b></span>
+          <span class="chip">🌊 Vague : <b id="td-wave">0 / 10</b></span>
+          <button class="big-btn" id="td-start">Lancer la vague</button>
+          <button class="secondary-btn" id="td-reset">Recommencer</button>
+        </div>
+        <div class="td-towers">
+          <button class="f-btn td-tower" data-td-tower="archere">🏹 Archère · 30 🪙</button>
+          <button class="f-btn td-tower" data-td-tower="glace">❄️ Tour de glace · 40 🪙</button>
+          <button class="f-btn td-tower" data-td-tower="canon">💣 Canon · 60 🪙</button>
+        </div>
+        <canvas id="td-canvas"></canvas>
+        <p class="td-msg" id="td-msg"></p>
+      </div>
+    </section>
     </main>
 
     <div class="overlay hidden" id="overlay"></div>
@@ -108,6 +128,7 @@
 
     <footer>Travail terminé !</footer>
 
+    <script src="minijeu.js"></script>
     <script src="script.js"></script>
     <script
       type="module"

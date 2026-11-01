@@ -1208,6 +1208,10 @@ function renderStats() {
   openBtn.disabled = state.gold < BOOSTER_COST;
   $("#pack-cost").textContent = `🪙 ${BOOSTER_COST}`;
   $("#cost-note").textContent = `🪙 ${BOOSTER_COST}`;
+  // Onglet mini-jeu visible uniquement si la collection est complète (91/91)
+  const tdUnlocked = collectionComplete();
+  $("#tab-td").classList.toggle("hidden", !tdUnlocked);
+  if (!tdUnlocked && !$("#view-td").classList.contains("hidden")) switchTab("booster");
 }
 
 function renderRecent() {
@@ -1445,16 +1449,39 @@ function tickConfetti() {
 }
 
 /* ================== ÉVÉNEMENTS ================== */
+function collectionComplete() {
+  return Object.keys(state.cards).length >= SET.length;
+}
+
+let tdStarted = false;
+// Bonus de victoire du mini-jeu : +5 🪙 sur la cagnotte du TCG
+window.tdVictoryBonus = () => {
+  state.gold += 5;
+  save();
+  renderStats();
+};
+function startTD() {
+  if (tdStarted || !window.initTD) return;
+  tdStarted = true;
+  window.initTD();
+}
+
 function switchTab(tab) {
   const isBooster = tab === "booster";
+  const isColl = tab === "collection";
+  const isTd = tab === "td";
   $("#tab-booster").classList.toggle("active", isBooster);
-  $("#tab-collection").classList.toggle("active", !isBooster);
+  $("#tab-collection").classList.toggle("active", isColl);
+  $("#tab-td").classList.toggle("active", isTd);
   $("#view-booster").classList.toggle("hidden", !isBooster);
-  $("#view-collection").classList.toggle("hidden", isBooster);
-  if (!isBooster) renderCollection();
+  $("#view-collection").classList.toggle("hidden", !isColl);
+  $("#view-td").classList.toggle("hidden", !isTd);
+  if (isColl) renderCollection();
+  if (isTd) startTD();
 }
 $("#tab-booster").addEventListener("click", () => switchTab("booster"));
 $("#tab-collection").addEventListener("click", () => switchTab("collection"));
+$("#tab-td").addEventListener("click", () => switchTab("td"));
 $("#open-btn").addEventListener("click", showPackModal);
 $("#pack").addEventListener("click", showPackModal);
 
