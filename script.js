@@ -1012,6 +1012,8 @@ const SET = [
 ];
 const byId = Object.fromEntries(SET.map((c) => [c.id, c]));
 const RARITIES = ["Commune", "Rare", "Épique", "Légendaire", "Mythique"];
+// Ordre d'affichage des factions dans la collection (le reste en alphabétique à la fin)
+const FACTION_ORDER = ["Alliance", "Horde", "Kaldorei", "Fléau", "Drôme (26)", "ZHB"];
 const RARITY_CLASS = {
   Commune: "c-common",
   Rare: "c-rare",
@@ -1243,6 +1245,17 @@ function renderCollection() {
       (filters.type === "all" || c.type === filters.type) &&
       (!filters.hideOwned || !state.cards[c.id]),
   );
+  // Tri : faction (ordre Warcraft), puis rareté dans la faction, les Mythiques toujours à la fin
+  list.sort((a, b) => {
+    const myth = (c) => (c.rarity === "Mythique" ? 1 : 0);
+    if (myth(a) !== myth(b)) return myth(a) - myth(b);
+    const faction = (c) => (c.theme || "").split("·")[0].trim();
+    const fa = faction(a), fb = faction(b);
+    const oa = FACTION_ORDER.indexOf(fa), ob = FACTION_ORDER.indexOf(fb);
+    const ordA = oa === -1 ? 99 : oa, ordB = ob === -1 ? 99 : ob;
+    if (ordA !== ordB) return ordA - ordB || fa.localeCompare(fb);
+    return RARITIES.indexOf(a.rarity) - RARITIES.indexOf(b.rarity) || a.name.localeCompare(b.name);
+  });
   const grid = $("#collection-grid");
   if (!list.length) {
     grid.innerHTML = `<div class="empty-msg">Aucune carte ne correspond à ces filtres 🤔</div>`;
