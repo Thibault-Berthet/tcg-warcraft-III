@@ -1444,9 +1444,20 @@ $("#pack").addEventListener("click", showPackModal);
 
 /* ---------- Enclume : forge de pièces d'or ---------- */
 let forging = false;
+/* Son de l'enclume (fichier mp3 dans assets) */
+const hammerSound = new Audio("assets/enclume_marteau.mp3");
+function playHammer() {
+  try {
+    hammerSound.currentTime = 0; // rejoue depuis le début à chaque coup
+    hammerSound.volume = 0.2; // volume doux
+    hammerSound.play().catch(() => {}); // ignoré si le navigateur bloque l'autoplay
+  } catch (e) { /* audio indisponible : on ignore */ }
+}
+
 function startForge() {
   if (forging) return;
   forging = true;
+  playHammer(); // son du marteau au clic
   const btn = $("#anvil-btn");
   const fill = $("#anvil-fill");
   btn.disabled = true;
