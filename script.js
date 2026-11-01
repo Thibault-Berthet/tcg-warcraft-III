@@ -1190,6 +1190,8 @@ function renderStats() {
     ([id]) => byId[id].rarity === "Légendaire",
   ).length;
   const legendaryTotal = SET.filter((c) => c.rarity === "Légendaire").length;
+  const mythics = owned.filter(([id]) => byId[id].rarity === "Mythique").length;
+  const mythicTotal = SET.filter((c) => c.rarity === "Mythique").length;
   const dupes = owned.reduce((a, [, v]) => a + Math.max(0, v.n - 1), 0);
   $("#stats").innerHTML = `
     <div class="chip">🪙 Pièces d'or : <b>${state.gold}</b></div>
@@ -1198,6 +1200,7 @@ function renderStats() {
     <div class="chip">Doublons : <b>${dupes}</b></div>
     <div class="chip">✨ Étincelantes : <b>${holoCount}</b></div>
     <div class="chip">🔥 Légendaires : <b>${legendaries} / ${legendaryTotal}</b></div>
+    <div class="chip">🌈 Mythiques : <b>${mythics} / ${mythicTotal}</b></div>
     ${!storageOk ? `<div class="chip">⚠️ Stockage indisponible dans ce contexte — la collection ne sera pas conservée</div>` : ""}
   `;
   const openBtn = $("#open-btn");
