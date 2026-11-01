@@ -1066,17 +1066,19 @@ function save() {
 
 /* ================== TIRAGE ================== */
 function rollRarity(guaranteed) {
-  const r = Math.random();
-  let rarity =
-    r < 0.01
+  // À 500+ boosters ouverts, la chance de Mythique passe de 1 % à 5 %
+  const pMythic = state.boosters >= 500 ? 0.05 : 0.01;
+  const pick = (r) =>
+    r < pMythic
       ? "Mythique"
-      : r < 0.05
+      : r < pMythic + 0.04
         ? "Légendaire"
-        : r < 0.15
+        : r < pMythic + 0.14
           ? "Épique"
-          : r < 0.4
+          : r < pMythic + 0.39
             ? "Rare"
             : "Commune";
+  let rarity = pick(Math.random());
   if (guaranteed && rarity === "Commune") {
     // dernier slot du booster : Rare minimum garanti
     const r2 = Math.random();
@@ -1084,8 +1086,7 @@ function rollRarity(guaranteed) {
   }
   // Ignore les raretés qui n'ont aucune carte dans le SET (set en construction)
   while (!SET.some((c) => c.rarity === rarity)) {
-    const r3 = Math.random();
-    rarity = r3 < 0.01 ? "Mythique" : r3 < 0.05 ? "Légendaire" : r3 < 0.15 ? "Épique" : r3 < 0.4 ? "Rare" : "Commune";
+    rarity = pick(Math.random());
   }
   return rarity;
 }
