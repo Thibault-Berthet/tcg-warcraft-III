@@ -9,7 +9,7 @@ boosters, révèle tes cartes et complète ton album de **91 cartes** illustrée
 - **⚒️ L'enclume** : clique pour forger une pièce d'or (barre de chargement de 3 s → 🪙 +1)
 - **🎴 Booster payant** : 5 cartes par booster, coût **🪙 5 pièces d'or** (déchire le paquet, retourne les cartes une par une !)
 - **5 raretés** : Commune 60 % · Rare 25 % · Épique 10 % · Légendaire 4 % · Mythique 1 % — avec au moins une Rare garantie sur la 5e carte
-- **✨ Versions étincelantes (holo)** : 8 % de chance par carte tirée, définitif une fois obtenu
+- **✨ Versions étincelantes (holo)** : 20 % de chance par carte tirée, définitif une fois obtenu
 - **📖 Album de collection** : progression, filtres par rareté/type, doublons — les cartes non possédées montrent un ❓ (l'image est révélée au premier tirage)
 - **Cartes illustrées** : chaque carte a sa propre image dans `assets/`, avec titre, thème et lore Warcraft
 - **Sauvegarde automatique** dans le navigateur (localStorage) — pas besoin de compte

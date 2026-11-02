@@ -1100,7 +1100,7 @@ function openBooster() {
   for (let i = 0; i < 5; i++) {
     const rarity = rollRarity(i === 4);
     const card = pickCard(rarity);
-    const holo = Math.random() < 0.08; // 8% de version étincelante
+    const holo = Math.random() < 0.2; // 20% de version étincelante
     const owned = state.cards[card.id];
     const isNew = !owned;
     if (owned) owned.n += 1;
