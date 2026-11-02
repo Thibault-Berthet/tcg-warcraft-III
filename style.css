@@ -399,8 +399,8 @@ main {
 
 /* ---------------- CARTES ---------------- */
 .card {
-  width: 158px;
-  aspect-ratio: 3/4.2;
+  width: 190px;
+  aspect-ratio: 3/5.2;
   border-radius: 12px;
   perspective: 900px;
   flex: 0 0 auto;
@@ -540,11 +540,14 @@ main {
 .card-art-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* l'image entière rentre, bandes remplies par le fond */
   display: block;
   transition: transform 0.4s ease;
 }
-.card.has-img .card-art { height: 54%; }
+.card.has-img .card-art {
+  height: 54%;
+  background: #072033; /* fond bleu foncé derrière l'image */
+}
 .card.has-img .card-art::after {
   content: "";
   position: absolute;
@@ -560,7 +563,7 @@ main {
 .card:hover .card-art-img { transform: scale(1.07); }
 
 /* --- Cartes "larges" : titre en haut, thème + lore en bas --- */
-.card.card-lg { width: 208px; }
+.card.card-lg { width: 250px; }
 .card.card-lg .card-title-bar {
   padding: 16px 8px 7px;
   font-family: Georgia, serif;
@@ -581,18 +584,18 @@ main {
   text-align: center;
   display: flex;
   flex-direction: column;
-  min-height: 0;
-  max-height: 48%;
+  min-height: 25%; /* la zone texte garde toujours au moins 25% de la carte */
+  max-height: 70%;
 }
 .card.card-lg .card-theme {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 4px;
 }
 .card.card-lg .card-lore {
-  font-size: 11px;
+  font-size: 12.5px;
   font-style: italic;
   color: #a8c6d1;
   line-height: 1.45;
@@ -602,8 +605,8 @@ main {
   scrollbar-color: #1d5468 transparent;
 }
 .card.card-lg .card-lore.text-long {
-  font-size: 10px;
-  line-height: 1.35;
+  font-size: 11.5px;
+  line-height: 1.4;
 }
 .card-name {
   font-family: Georgia, serif;
@@ -727,13 +730,13 @@ main {
 }
 .count-badge {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
-  font-size: 10.5px;
+  top: 24px; /* en haut à gauche, sous le badge NOUVEAU/Doublon */
+  left: 8px;
+  font-size: 9px;
   background: rgba(0, 0, 0, 0.65);
   border: 1px solid #1d5468;
   color: var(--text);
-  padding: 2px 7px;
+  padding: 0 5px;
   border-radius: 999px;
 }
 .new-badge {
@@ -1054,10 +1057,10 @@ footer {
 
 @media (max-width: 640px) {
   .card {
-    width: 132px;
+    width: 158px;
   }
   .card.card-lg {
-    width: 172px;
+    width: 205px;
   }
   .card-art {
     font-size: 44px;
