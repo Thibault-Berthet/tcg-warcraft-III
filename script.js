@@ -40,7 +40,8 @@ const SET = [
     img: "assets/justin-thavirat-02arthas.jpg",
     theme: "Alliance · Lordaeron",
     lore: "Chevaliers et soldats du royaume de Lordaeron, les humains de l'Alliance défendent Azeroth avec foi, acier et cavalerie.",
-    flavor: "« Pour l'Alliance ! » — crié par quelqu'un qui n'a jamais vu un orc de près.",
+    flavor:
+      "« Pour l'Alliance ! » — crié par quelqu'un qui n'a jamais vu un orc de près.",
   },
   {
     id: "c04",
@@ -239,7 +240,8 @@ const SET = [
     theme: "Alliance · Unité de base",
     lore: "Mage de bataille de l'Alliance, experte en sortilèges de zone.",
     flavor: "Elle transforme ses ennemis en grenouilles. Ça coasse moins fort.",
-  },  {
+  },
+  {
     id: "c26",
     name: "Étendard elfe de la nuit",
     type: "Faction",
@@ -919,7 +921,8 @@ const SET = [
     img: "assets/gardienne_elfe.png",
     theme: "Kaldorei · Héros",
     lore: "Gardienne emprisonnée pendant dix mille ans, elle manie son éventail de précision pour frapper les ennemis à distance.",
-    flavor: "Elle a attendu dix mille ans. Elle peut attendre que vous mouriez.",
+    flavor:
+      "Elle a attendu dix mille ans. Elle peut attendre que vous mouriez.",
   },
   {
     id: "c88",
@@ -941,7 +944,8 @@ const SET = [
     img: "assets/AlexVonTraff_zhb.jpg",
     theme: "ZHB · Moine percussionniste",
     lore: "Moine percussionniste légendaire, AlexVonTraff ZHB garde un calme olympien en plein combat et frappe ses tambours au rythme des batailles d'Azeroth.",
-    flavor: "Toujours serein. Toujours prêt à tout. Surtout à un solo de batterie.",
+    flavor:
+      "Toujours serein. Toujours prêt à tout. Surtout à un solo de batterie.",
   },
   {
     id: "c90",
@@ -952,7 +956,8 @@ const SET = [
     img: "assets/tattooine_zhb.jpg",
     theme: "ZHB · Métaleuse",
     lore: "Métaleuse légendaire du clan ZHB, Tattooine déchaîne ses solos de guitare sur les champs de bataille d'Azeroth — entourée de ses chats, ses chiens et ses chevaux.",
-    flavor: "Elle adore les chats, les chiens et les chevaux. Dans cet ordre, ou pas.",
+    flavor:
+      "Elle adore les chats, les chiens et les chevaux. Dans cet ordre, ou pas.",
   },
   {
     id: "c91",
@@ -983,8 +988,8 @@ const SET = [
     rarity: "Mythique",
     icon: "🎮",
     img: "assets/Gufry_zhb.jpg",
-    theme: "ZHB · Joueur",
-    lore: "Joueur légendaire du clan ZHB, Gufry ZHB est assidu, volontaire, téméraire, persévérant et patient : rien ne lui résiste, même les boss les plus coriaces d'Azeroth.",
+    theme: "ZHB · Kpopeur",
+    lore: "Kpopeur légendaire du clan ZHB, Gufry ZHB est assidu, volontaire, téméraire, persévérant et patient : rien ne lui résiste, même les boss les plus coriaces d'Azeroth.",
     flavor: "Encore une tentative. Encore une. Et encore une.",
   },
   {
@@ -1013,7 +1018,14 @@ const SET = [
 const byId = Object.fromEntries(SET.map((c) => [c.id, c]));
 const RARITIES = ["Commune", "Rare", "Épique", "Légendaire", "Mythique"];
 // Ordre d'affichage des factions dans la collection (le reste en alphabétique à la fin)
-const FACTION_ORDER = ["Alliance", "Horde", "Kaldorei", "Fléau", "Drôme (26)", "ZHB"];
+const FACTION_ORDER = [
+  "Alliance",
+  "Horde",
+  "Kaldorei",
+  "Fléau",
+  "Drôme (26)",
+  "ZHB",
+];
 const RARITY_CLASS = {
   Commune: "c-common",
   Rare: "c-rare",
@@ -1054,7 +1066,8 @@ try {
   storageOk = false; // stockage indisponible : on continue en mémoire
 }
 // Nettoie les sauvegardes : ignore les ids de cartes qui n'existent plus dans le SET
-for (const id of Object.keys(state.cards)) if (!byId[id]) delete state.cards[id];
+for (const id of Object.keys(state.cards))
+  if (!byId[id]) delete state.cards[id];
 state.recent = state.recent.filter((id) => byId[id]);
 function save() {
   try {
@@ -1082,7 +1095,14 @@ function rollRarity(guaranteed) {
   if (guaranteed && rarity === "Commune") {
     // dernier slot du booster : Rare minimum garanti
     const r2 = Math.random();
-    rarity = r2 < 0.025 ? "Mythique" : r2 < 0.125 ? "Légendaire" : r2 < 0.375 ? "Épique" : "Rare";
+    rarity =
+      r2 < 0.025
+        ? "Mythique"
+        : r2 < 0.125
+          ? "Légendaire"
+          : r2 < 0.375
+            ? "Épique"
+            : "Rare";
   }
   // Ignore les raretés qui n'ont aucune carte dans le SET (set en construction)
   while (!SET.some((c) => c.rarity === rarity)) {
@@ -1212,7 +1232,8 @@ function renderStats() {
   // Onglet mini-jeu visible uniquement si la collection est complète (91/91)
   const tdUnlocked = collectionComplete();
   $("#tab-td").classList.toggle("hidden", !tdUnlocked);
-  if (!tdUnlocked && !$("#view-td").classList.contains("hidden")) switchTab("booster");
+  if (!tdUnlocked && !$("#view-td").classList.contains("hidden"))
+    switchTab("booster");
 }
 
 function renderRecent() {
@@ -1258,11 +1279,17 @@ function renderCollection() {
     const myth = (c) => (c.rarity === "Mythique" ? 1 : 0);
     if (myth(a) !== myth(b)) return myth(a) - myth(b);
     const faction = (c) => (c.theme || "").split("·")[0].trim();
-    const fa = faction(a), fb = faction(b);
-    const oa = FACTION_ORDER.indexOf(fa), ob = FACTION_ORDER.indexOf(fb);
-    const ordA = oa === -1 ? 99 : oa, ordB = ob === -1 ? 99 : ob;
+    const fa = faction(a),
+      fb = faction(b);
+    const oa = FACTION_ORDER.indexOf(fa),
+      ob = FACTION_ORDER.indexOf(fb);
+    const ordA = oa === -1 ? 99 : oa,
+      ordB = ob === -1 ? 99 : ob;
     if (ordA !== ordB) return ordA - ordB || fa.localeCompare(fb);
-    return RARITIES.indexOf(a.rarity) - RARITIES.indexOf(b.rarity) || a.name.localeCompare(b.name);
+    return (
+      RARITIES.indexOf(a.rarity) - RARITIES.indexOf(b.rarity) ||
+      a.name.localeCompare(b.name)
+    );
   });
   const grid = $("#collection-grid");
   if (!list.length) {
@@ -1353,7 +1380,11 @@ function revealCards() {
   });
   $("#close-modal").addEventListener("click", closeModal);
   // légendaire dans le booster ? petit teaser à l'ouverture
-  if (currentPulls.some((p) => ["Légendaire", "Mythique"].includes(byId[p.id].rarity)))
+  if (
+    currentPulls.some((p) =>
+      ["Légendaire", "Mythique"].includes(byId[p.id].rarity),
+    )
+  )
     shakeScreen();
 }
 
@@ -1495,7 +1526,9 @@ function playHammer() {
     hammerSound.currentTime = 0; // rejoue depuis le début à chaque coup
     hammerSound.volume = 0.2; // volume doux
     hammerSound.play().catch(() => {}); // ignoré si le navigateur bloque l'autoplay
-  } catch (e) { /* audio indisponible : on ignore */ }
+  } catch (e) {
+    /* audio indisponible : on ignore */
+  }
 }
 
 function startForge() {
