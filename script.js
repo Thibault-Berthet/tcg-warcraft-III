@@ -155,7 +155,7 @@ const SET = [
   },
   {
     id: "c16",
-    name: "Gyrocopère",
+    name: "Gyrocoptère",
     type: "Créature",
     rarity: "Commune",
     icon: "🚁",
@@ -183,7 +183,7 @@ const SET = [
     icon: "💣",
     img: "assets/mortier_humain.jpg",
     theme: "Alliance · Unité de base",
-    lore: "Artillerie lourde humaine, idéale pour raser les murailles ennemies.",
+    lore: "Artillerie lourde naine, idéale pour raser les murailles ennemies.",
     flavor: "Portée : tout. Précision : on verra.",
   },
   {
