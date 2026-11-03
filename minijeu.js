@@ -81,11 +81,11 @@ window.initTD = function () {
   }
 
   function makeEnemy(boss = false) {
-    const hp = boss ? 400 + wave * 60 : 100 + wave * 40; // grunts un peu moins costauds
+    const hp = boss ? 400 + wave * 60 : 60 + wave * 25; // grunts bien moins costauds
     return {
       x: waypoints[0].x, y: waypoints[0].y, wp: 1,
       hp, maxHp: hp,
-      speed: boss ? 22 : 50 + wave * 3, // grunts un peu moins rapides
+      speed: boss ? 22 : 40 + wave * 2, // grunts bien moins rapides
       slowUntil: 0, slowFactor: 1,
       boss, icon: boss ? "🐗" : "👺",
       reward: boss ? 50 : 5,
